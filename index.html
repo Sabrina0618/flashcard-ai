@@ -1,20 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flashcard AI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 单词卡片</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="card" onclick="flipCard()">
-    <div class="card-content" id="card-front">abandon</div>
-    <div class="card-content hidden" id="card-back">
-      <div class="definition"><strong>释义：</strong> 放弃；遗弃</div>
-      <div class="example"><strong>例句：</strong> He had to abandon his car.</div>
-      <div class="confusions"><strong>混淆词：</strong> <br/><em>abdomen</em>：腹部<br/><em>abound</em>：大量存在</div>
-    </div>
-  </div>
-  <script src="script.js"></script>
+  <main>
+    <h1>📘 单词闪卡演示</h1>
+    <input type="file" id="imageInput" accept="image/*" multiple />
+    <button id="generateBtn">生成卡片</button>
+    <div id="cardContainer"></div>
+  </main>
+
+  <script>
+    const imageInput = document.getElementById("imageInput");
+    const generateBtn = document.getElementById("generateBtn");
+    const cardContainer = document.getElementById("cardContainer");
+
+    generateBtn.addEventListener("click", async () => {
+      const files = Array.from(imageInput.files);
+      if (files.length === 0) return alert("请先上传图片");
+      cardContainer.innerHTML = "";
+      for (let file of files) {
+        const card = await mockGenerateCard(file.name);
+        renderCard(card);
+      }
+    });
+
+    function renderCard(data) {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h2>${data.word}</h2>
+        <div class="card-section meaning">中文释义：${data.meaning}</div>
+        <div class="card-section sentence">例句：${data.sentence}</div>
+        <div class="card-section confuse">
+          <strong>混淆词：</strong>
+          <ul>${data.confuse.map(c => `<li>${c.word}：${c.meaning}</li>`).join('')}</ul>
+        </div>
+      `;
+      cardContainer.appendChild(card);
+    }
+
+    async function mockGenerateCard(name) {
+      const word = name.split('.')[0].toLowerCase();
+      return {
+        word,
+        meaning: "模拟释义（未来可接 OpenAI）",
+        sentence: `This is a sample sentence with '${word}'.`,
+        confuse: [
+          { word: "confuse1", meaning: "混淆释义1" },
+          { word: "confuse2", meaning: "混淆释义2" }
+        ]
+      }
+    }
+  </script>
 </body>
 </html>

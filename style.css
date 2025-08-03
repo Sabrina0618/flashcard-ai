@@ -1,39 +1,45 @@
 body {
-  font-family: sans-serif;
-  background-color: #f3f4f6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: -apple-system, sans-serif;
+  background-color: #f9fafb;
+  padding: 20px;
+  margin: 0;
+  text-align: center;
+}
+h1 {
+  color: #007aff;
+}
+input[type="file"] {
+  margin: 16px;
+}
+button {
+  background: #007aff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 .card {
   background: white;
-  border-radius: 12px;
-  width: 300px;
-  height: 200px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  margin: 16px auto;
   padding: 16px;
-  transition: transform 0.3s ease;
+  max-width: 400px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  text-align: left;
 }
-.card-content {
-  text-align: center;
-  font-size: 20px;
+.card-section {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
 }
-.hidden {
-  display: none;
+.meaning {
+  background-color: #e0f7fa;
 }
-.definition {
-  color: #333;
-  margin-bottom: 10px;
+.sentence {
+  background-color: #e8f5e9;
 }
-.example {
-  color: #1d4ed8;
-  margin-bottom: 10px;
-}
-.confusions {
-  color: #b91c1c;
+.confuse {
+  background-color: #f3e5f5;
 }
